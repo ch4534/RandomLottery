@@ -1,0 +1,2 @@
+C:\Users\admin\Desktop\安装包准备\RandomLottery\RandomLottery\bin\Release\RandomLottery.exe.config
+F:\WPF\RandomLottery\RandomLottery\bin\Release\RandomLottery.exe.config

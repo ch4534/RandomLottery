@@ -1,0 +1,74 @@
+﻿<Window x:Class="RandomLottery.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="弹幕抽奖机" Height="900" Width="450" Closing="OnClosing" WindowStartupLocation="CenterScreen">
+    <!--xmlns:gifLib="clr-namespace:GifImageLib;assembly=GifImageLib"-->
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0">
+            <TextBlock Text="选择网卡设备"/>
+            <ComboBox x:Name="NetDevice"/>
+            <TextBlock Text="中奖名单" Margin="0, 10, 0, 0"/>
+        </StackPanel>
+        <ListView x:Name="HitPrizeList" Grid.Row="1" SelectionChanged="item_select" KeyUp="list_key_up">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="中奖ID" Width="150" DisplayMemberBinding="{Binding NAME}"/>
+                    <GridViewColumn Header="中奖奖品" Width="300" DisplayMemberBinding="{Binding PRIZE}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="设置中奖人数" Grid.Row="0" Grid.Column="0"/>
+            <TextBox x:Name="LotteryManNum" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" LostFocus="CheckTextNum"/>
+            <TextBlock Text="奖品设置" Grid.Row="0" Grid.Column="2"/>
+            <ComboBox x:Name="prizeSet" Grid.Row="1" Grid.Column="2" IsEditable="True"/>
+            <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="3">
+                <Button x:Name="AddButton" Width="15" Margin="3, 0, 3, 0" Click="AddLottery">+</Button>
+                <Button x:Name="SubButton" Width="15" Margin="3, 0, 3, 0" Click="SubLottery">-</Button>
+            </StackPanel>
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="等级限制"/>
+            <ComboBox x:Name="ComboBoxLevelLimit" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" Margin="3">
+                            <!--<gifLib:GifImage Source="{Binding Levelgif}"/>-->
+                            <Image Source="{Binding Levelgif}"/>
+                            <TextBlock Text="{Binding Leveltext}" Margin="3, 0"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+                <!--<ComboBoxItem>
+                    <StackPanel Orientation="Horizontal">
+                        <gifLib:GifImage Source="res/image/16.gif"/>
+                        <TextBlock Text="16" Margin="3, 0"/>
+                    </StackPanel>
+                </ComboBoxItem>-->
+            </ComboBox>
+            <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="2" Margin="3, 0">
+                <Button x:Name="CountBtn" Click="CountHandler">开始统计</Button>
+                <Button Margin="5, 0, 0, 0" Click="LotteryHandle">抽　　奖</Button>
+            </StackPanel>
+            <TextBlock x:Name="info" Grid.Row="4" Grid.ColumnSpan="4" Text="参与抽奖的人数："/>
+            <TextBlock x:Name="version" Grid.Row="5" Grid.ColumnSpan="4" HorizontalAlignment="Right" Text="版本："/>
+        </Grid>
+    </Grid>
+</Window>
